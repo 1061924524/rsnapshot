@@ -4826,7 +4826,7 @@ sub display_cp_al {
 	if (!defined($dest)) { bail('dest not defined in display_cp_al()'); }
 
 	if (defined($config_vars{'cmd_cp'})) {
-		print_cmd("$config_vars{'cmd_cp'} -al $src $dest");
+		print_cmd("$config_vars{'cmd_cp'} -a $src $dest");
 	}
 	else {
 		print_cmd("native_cp_al(\"$src\", \"$dest\")");
@@ -4876,7 +4876,7 @@ sub test_cp_al {
 	-d $s || mkdir($s) || return (-1);
 	open(TT1, ">>$s/tt1") || return (-1);
 	close(TT1) || return (-1);
-	$result = system($config_vars{'cmd_cp'}, '-al', "$s", "$d");
+	$result = system($config_vars{'cmd_cp'}, '-a', "$s", "$d");
 	if ($result != 0) {
 		return (1);
 	}
@@ -4910,10 +4910,10 @@ sub gnu_cp_al {
 	}
 
 	# make the system call to GNU cp
-	$result = system($config_vars{'cmd_cp'}, '-al', "$src", "$dest");
+	$result = system($config_vars{'cmd_cp'}, '-a', "$src", "$dest");
 	if ($result != 0) {
 		$status = $result >> 8;
-		print_err("$config_vars{'cmd_cp'} -al $src $dest failed (result $result, exit status $status).", 2);
+		print_err("$config_vars{'cmd_cp'} -a $src $dest failed (result $result, exit status $status).", 2);
 		if (test_cp_al() > 0) {
 			print_err("Perhaps your cp does not support -al options?", 2);
 		}
